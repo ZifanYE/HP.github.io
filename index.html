@@ -1,149 +1,200 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <title>Portfolio | AI × Game</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      margin: 0;
-      background: #fafafa;
-      color: #222;
-      line-height: 1.7;
-    }
-    header {
-      background: #111;
-      color: #fff;
-      padding: 48px 24px;
-    }
-    section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 24px;
-    }
-    h1, h2 {
-      font-weight: 600;
-    }
-    h2 {
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 8px;
-    }
-    .card {
-      background: #fff;
-      padding: 20px;
-      margin: 16px 0;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      font-size: 14px;
-      color: #666;
-      padding: 40px 0;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>YE Zifan | AI × Game Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f4f4f4;
+  color: #222;
+}
+
+header {
+  background: #111;
+  color: #fff;
+  padding: 40px 24px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+header p {
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px;
+}
+
+/* grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card h2 {
+  font-size: 18px;
+  margin: 0;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 6px;
+}
+
+.thumb {
+  width: 100%;
+  height: 160px;
+  background: #ddd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 14px;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.tag {
+  font-size: 12px;
+  background: #eee;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+footer {
+  text-align: center;
+  padding: 32px;
+  font-size: 13px;
+  color: #666;
+}
+</style>
 </head>
 
 <body>
 
 <header>
   <h1>YE Zifan</h1>
-  <p>AI × ゲーム / 研究・開発ポートフォリオ</p>
+  <p>AI × ゲーム｜研究・実装ポートフォリオ</p>
 </header>
 
-<section>
-  <h2>Profile</h2>
+<main>
+
+<div class="grid">
+
+  <!-- Profile -->
   <div class="card">
+    <h2>Profile</h2>
+    <div class="thumb">写真・イメージ</div>
     <p>
-      AI とゲームを軸に、研究と実装の両面から取り組んでいます。<br>
-      高校時代はロボット競技チームで後方支援を担当し、海外大会（ニュージーランド・米国等）での受賞を経験しました。<br>
-      大学以降は計算機とプログラミングへの関心を深め、欧州交換留学（Erasmus+）を経て、日本で AI 研究に取り組んでいます。
-    </p>
-  </div>
-</section>
-
-<section>
-  <h2>Games / Software</h2>
-
-  <div class="card">
-    <h3>🎮 Game Project 1</h3>
-    <p>概要：自作ゲーム（Web / PC）</p>
-    <p>技術：Unity / C# / UI設計</p>
-    <p><a href="https://example.com">▶ プレイ / デモ</a></p>
-  </div>
-
-  <div class="card">
-    <h3>🎮 Game Project 2</h3>
-    <p>概要：AI要素を含む実験的ゲーム</p>
-    <p>技術：Python / AI / システム設計</p>
-    <p><a href="https://example.com">▶ 紹介ページ</a></p>
-  </div>
-
-</section>
-
-<section>
-  <h2>Research / Publications</h2>
-
-  <div class="card">
-    <p>
-      • IEEE GCCE Demo Paper（採択）<br>
-      • 国際会議論文 3 本（うち 2 本は先輩研究の支援）<br>
-      • AI を用いたゲーム表現・立ち絵切替手法の研究
-    </p>
-    <p>
-      <a href="https://example.com">▶ 論文一覧・PDF</a>
+      AI とゲームを軸に、研究と実装の両立に取り組んでいます。<br>
+      高校時代はロボット競技チームで後方支援を担当し、海外大会（米国・ニュージーランド等）での受賞を経験しました。<br>
+      大学以降は計算機とプログラミングへの関心を深め、欧州交換留学を経て日本で AI 研究を行っています。
     </p>
   </div>
 
-</section>
-
-<section>
-  <h2>Skills</h2>
+  <!-- Game Demo -->
   <div class="card">
+    <h2>Game Demo</h2>
+    <div class="thumb">ゲーム画面 / GIF</div>
+    <p><strong>Study With ME（Unity）</strong></p>
+    <p>
+      居家生活を想定した、作業・休憩に寄り添うリラックス系ゲーム。<br>
+      日常感と没入感のバランスを重視しました。
+    </p>
+    <p>
+      <span class="tag">Unity</span>
+      <span class="tag">C#</span>
+      <span class="tag">UI/UX</span>
+    </p>
+    <a href="https://zifanye.github.io/StudyWithME_unity/" target="_blank">
+      ▶ プレイする
+    </a>
+  </div>
+
+  <!-- Ongoing Game -->
+  <div class="card">
+    <h2>Ongoing Project</h2>
+    <div class="thumb">開発中スクリーンショット</div>
+    <p><strong>SLGゲーム（開発中）</strong></p>
+    <p>
+      キャラクター・システム設計を含むシミュレーションゲーム。<br>
+      現在は設計とプロトタイプ実装を並行して進行中。
+    </p>
+    <p>
+      <span class="tag">Game Design</span>
+      <span class="tag">System</span>
+      <span class="tag">Prototype</span>
+    </p>
+  </div>
+
+  <!-- Research -->
+  <div class="card">
+    <h2>Research</h2>
+    <div class="thumb">研究デモ / 図</div>
+    <p>
+      ・IEEE GCCE デモ論文（採択）<br>
+      ・国際会議論文 3 本（うち 2 本は先輩研究の支援）<br>
+      ・ストーリー進行に応じた立ち絵切替手法の研究
+    </p>
+    <a href="#">▶ 論文一覧</a>
+  </div>
+
+  <!-- Skills -->
+  <div class="card">
+    <h2>Skills</h2>
+    <div class="thumb">技術イメージ</div>
     <p>
       言語：C#, Python, JavaScript, C++<br>
-      分野：ゲーム開発 / AI / UI・UX / 研究実装<br>
-      特徴：短期間での課題整理・実行、支援役としての調整力
+      分野：ゲーム開発 / AI / UI設計<br>
+      強み：短期間での判断と実行、支援役としての調整力
     </p>
   </div>
-</section>
 
-<section>
-  <h2>About Me</h2>
+  <!-- Personal -->
   <div class="card">
+    <h2>Personal</h2>
+    <div class="thumb">日常・趣味写真</div>
     <p>
-      規律を重んじつつ、自分の内面と向き合う性格です。<br>
-      学生時代は学業・研究・課外活動を並行し、長期目標に向けて段階的に努力することを大切にしてきました。
-    </p>
-    <p>
-      趣味：カフェラテ巡り（日本各地のコーヒー店探索）<br>
-      特技：指の柔軟性（音楽ゲーム経験）
+      趣味：カフェラテ巡り（日本各地）<br>
+      特技：指の柔軟性（音楽ゲーム経験）<br>
+      規律を重んじつつ、内面と向き合い努力を継続する姿勢を大切にしています。
     </p>
   </div>
-</section>
 
-<section>
-  <h2>Contact</h2>
-  <div class="card">
-    <p>
-      GitHub：<a href="https://github.com/yourname">https://github.com/yourname</a><br>
-      Email：yourmail@example.com
-    </p>
-  </div>
-</section>
+</div>
+
+</main>
 
 <footer>
-  © 2026 YE Zifan
+© 2026 YE Zifan
 </footer>
 
 </body>
 </html>
-
