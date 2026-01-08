@@ -1,17 +1,16 @@
 <!--
 ========================================================
-【Pictures フォルダに必要な画像一覧（4:3 推奨）】
+【Pictures フォルダに必要な画像一覧（4:3 / 小さめ表示）】
 
 Pictures/
-├─ header.png                // 上部黒帯の代わりのヘッダー写真
-├─ avatar.png                // 名前左の円形アイコン（ゲーム風）
-├─ game_studywithme.png      // Study With ME デモ用スクリーンショット
-├─ game_slg.png              // 開発中SLGのスクリーンショット
-├─ research_ice.png          // ICE研究室・研究活動イメージ
-├─ history_childhood.png     // ゲーム遍歴（幼少期）
-├─ history_teen.png          // ゲーム遍歴（中高生）
-├─ history_now.png           // ゲーム遍歴（現在）
-※ 画像が存在しない場合は自動でプレースホルダー表示
+├─ header.jpg                // 上部ヘッダー写真（横長）
+├─ avatar.png                // 名前左の円形アイコン
+├─ game_studywithme.png      // ゲームデモ画像（小さく表示）
+├─ game_slg.png              // SLG 開発中画像（小さく表示）
+├─ research_paper1.png       // 研究①（GCCE Demo）
+├─ research_paper2.png       // 研究②（Entertainment Computing）
+├─ research_paper3.png       // 研究③（AP-Based）
+※ 研究画像は無くても可（無い場合はテキストのみ表示）
 ========================================================
 -->
 
@@ -21,9 +20,7 @@ Pictures/
   <meta charset="UTF-8" />
   <title>叶 子凡 | Personal Homepage</title>
 
-  <!-- ===== CSS（レイアウトは微調整のみ） ===== -->
   <style>
-    /* 全体設定 */
     body {
       margin: 0;
       font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", sans-serif;
@@ -31,22 +28,21 @@ Pictures/
       color: #222;
     }
 
-    /* ヘッダー（黒帯→写真に変更） */
+    /* ===== Header ===== */
     header {
-      background: url("Pictures/header.png") center/cover no-repeat;
-      padding: 24px;
+      background: url("Pictures/header.jpg") center/cover no-repeat;
+      padding: 20px;
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
     }
 
-    /* 円形アバター（新規追加） */
     .avatar {
-      width: 96px;
-      height: 96px;
+      width: 72px;               /* ★ 图片过大 → 缩小头像 */
+      height: 72px;
       border-radius: 50%;
       overflow: hidden;
-      border: 3px solid rgba(255,255,255,0.8);
+      border: 2px solid rgba(255,255,255,0.8);
       flex-shrink: 0;
     }
 
@@ -56,33 +52,33 @@ Pictures/
       object-fit: cover;
     }
 
-    /* 名前エリア（漢字名を明示） */
     .name-block {
       color: white;
     }
 
     .name-block h1 {
       margin: 0;
-      font-size: 28px;
+      font-size: 24px;           /* ★ 标题略缩小 */
     }
 
     .name-block p {
       margin: 4px 0 0;
+      font-size: 13px;
       opacity: 0.9;
-      font-size: 14px;
     }
 
-    /* Tabs */
+    /* ===== Tabs ===== */
     .tabs {
       display: flex;
       background: #222;
     }
 
     .tab {
-      padding: 12px 20px;
+      padding: 10px 18px;        /* ★ Tab 更紧凑 */
       color: #ccc;
       cursor: pointer;
       user-select: none;
+      font-size: 14px;
     }
 
     .tab.active {
@@ -90,21 +86,21 @@ Pictures/
       border-bottom: 3px solid #4caf50;
     }
 
-    /* Section */
+    /* ===== Sections ===== */
     .section {
       display: none;
-      padding: 20px;
+      padding: 18px;
     }
 
     .section.active {
       display: block;
     }
 
-    /* 卡片布局（双栏/三列自适应，微调为更紧凑） */
+    /* ===== Grid ===== */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* ★ 卡片更小 */
+      gap: 14px;
     }
 
     .card {
@@ -114,155 +110,171 @@ Pictures/
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    /* 4:3 图片区域 */
+    /* ===== 图片统一缩小 ===== */
     .card img {
       width: 100%;
       aspect-ratio: 4 / 3;
       object-fit: cover;
       background: #ddd;
+      max-height: 180px;         /* ★ 限制图片高度，避免过大 */
     }
 
     .card-body {
-      padding: 12px;
-      font-size: 14px;
+      padding: 10px;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
     .card-body h3 {
       margin: 0 0 6px;
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .card-body a {
       color: #4caf50;
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
+    }
+
+    /* ===== 游戏遍歴：纯文字（去掉图片） ===== */
+    .history-text {
+      background: white;
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-size: 14px;
+      line-height: 1.6;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ===== Header ===== -->
-  <header>
-    <!-- 新增：左侧圆形头像 -->
-    <div class="avatar">
-      <img src="Pictures/avatar.png" onerror="this.src='https://via.placeholder.com/200x200?text=Avatar'">
-    </div>
-
-    <!-- 名字区域（加入汉字名 叶 子凡） -->
-    <div class="name-block">
-      <h1>叶 子凡</h1>
-      <p>AI × ゲーム / 研究・開発</p>
-    </div>
-  </header>
-
-  <!-- ===== Tabs（SLG 已并入 游戏制作） ===== -->
-  <div class="tabs">
-    <div class="tab active" data-tab="games">ゲーム制作</div>
-    <div class="tab" data-tab="research">研究・論文</div>
-    <div class="tab" data-tab="history">ゲーム遍歴</div>
+<header>
+  <div class="avatar">
+    <img src="Pictures/avatar.png"
+         onerror="this.src='https://via.placeholder.com/200x200?text=Avatar'">
   </div>
-
-  <!-- ===== ゲーム制作 ===== -->
-  <div class="section active" id="games">
-    <div class="grid">
-
-      <!-- Study With ME -->
-      <div class="card">
-        <img src="Pictures/game_studywithme.png"
-             onerror="this.src='https://via.placeholder.com/400x300?text=Study+With+ME'">
-        <div class="card-body">
-          <h3>Study With ME</h3>
-          <p>
-            居家生活を想定したリラックス系ゲームデモ。
-            Unity / WebGL。
-          </p>
-          <a href="https://zifanye.github.io/StudyWithME_unity/" target="_blank">
-            ▶ Demo を開く
-          </a>
-        </div>
-      </div>
-
-      <!-- SLG（ここに統合、※新規Tabは作っていない） -->
-      <div class="card">
-        <img src="Pictures/game_slg.png"
-             onerror="this.src='https://via.placeholder.com/400x300?text=SLG+Project'">
-        <div class="card-body">
-          <h3>SLG Project（開発中）</h3>
-          <p>
-            戦略要素とキャラクター管理を重視したSLG。
-            現在システム設計とUIを開発中。
-          </p>
-        </div>
-      </div>
-
-    </div>
+  <div class="name-block">
+    <h1>叶 子凡</h1>
+    <p>AI × ゲーム / 研究・開発</p>
   </div>
+</header>
 
-  <!-- ===== 研究・論文 ===== -->
-  <div class="section" id="research">
-    <div class="grid">
-      <div class="card">
-        <img src="Pictures/research_ice.png"
-             onerror="this.src='https://via.placeholder.com/400x300?text=Research'">
-        <div class="card-body">
-          <h3>ICE研究室 / AI×ゲーム研究</h3>
-          <p>
-            キャラクター立絵切替・ユーザー体験に関する研究。
-            IEEE GCCE 採択。
-          </p>
-        </div>
+<div class="tabs">
+  <div class="tab active" data-tab="games">ゲーム制作</div>
+  <div class="tab" data-tab="research">研究・論文</div>
+  <div class="tab" data-tab="history">ゲーム遍歴</div>
+</div>
+
+<!-- ===== ゲーム制作 ===== -->
+<div class="section active" id="games">
+  <div class="grid">
+
+    <div class="card">
+      <img src="Pictures/game_studywithme.png"
+           onerror="this.style.display='none'">
+      <div class="card-body">
+        <h3>Study With ME</h3>
+        <p>
+          居家生活を想定したリラックス系ゲームデモ。
+          Unity / WebGL。
+        </p>
+        <a href="https://zifanye.github.io/StudyWithME_unity/" target="_blank">
+          ▶ Demo
+        </a>
       </div>
     </div>
-  </div>
 
-  <!-- ===== ゲーム遍歴 ===== -->
-  <div class="section" id="history">
-    <div class="grid">
-
-      <div class="card">
-        <img src="Pictures/history_childhood.png"
-             onerror="this.src='https://via.placeholder.com/400x300?text=Childhood'">
-        <div class="card-body">
-          <h3>幼少期</h3>
-          <p>家庭用ゲーム・アニメ作品に親しむ。</p>
-        </div>
+    <div class="card">
+      <img src="Pictures/game_slg.png"
+           onerror="this.style.display='none'">
+      <div class="card-body">
+        <h3>SLG Project（開発中）</h3>
+        <p>
+          戦略要素とキャラクター管理を重視したSLG。
+          現在システム設計・UIを開発中。
+        </p>
       </div>
-
-      <div class="card">
-        <img src="Pictures/history_teen.png"
-             onerror="this.src='https://via.placeholder.com/400x300?text=Teenager'">
-        <div class="card-body">
-          <h3>中高生</h3>
-          <p>音楽ゲーム・チーム活動を通じた協力経験。</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="Pictures/history_now.png"
-             onerror="this.src='https://via.placeholder.com/400x300?text=Now'">
-        <div class="card-body">
-          <h3>現在</h3>
-          <p>ゲーム制作・研究の両立。</p>
-        </div>
-      </div>
-
     </div>
+
   </div>
+</div>
 
-  <!-- ===== JS（Tab切替のみ、既存機能を維持） ===== -->
-  <script>
-    // Tab 切替処理（変更なし、コメントのみ追加）
-    document.querySelectorAll(".tab").forEach(tab => {
-      tab.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+<!-- ===== 研究・論文（图片增加，3 篇） ===== -->
+<div class="section" id="research">
+  <div class="grid">
 
-        tab.classList.add("active");
-        document.getElementById(tab.dataset.tab).classList.add("active");
-      });
+    <!-- Paper 1 -->
+    <div class="card">
+      <img src="Pictures/research_paper1.png"
+           onerror="this.style.display='none'">
+      <div class="card-body">
+        <h3>Bring Your Own Story</h3>
+        <p>
+          LLMを用いて、既存文学作品を即座に視覚ノベル化。
+          Unity内で背景・対話・選択肢を自動生成。
+          本地モデルによる立絵背景除去も実装。
+        </p>
+        <p><b>IEEE GCCE 2025（Demo / 一作）</b></p>
+        <a href="https://ieeexplore.ieee.org/" target="_blank">IEEE Xplore</a>
+      </div>
+    </div>
+
+    <!-- Paper 2 -->
+    <div class="card">
+      <img src="Pictures/research_paper2.png"
+           onerror="this.style.display='none'">
+      <div class="card-body">
+        <h3>Dynamic Difficulty Adjustment</h3>
+        <p>
+          LLMを用いたカードゲーム（MTG）の動的難易度調整。
+          情報非対称な2体のAIによりバランス制御。
+        </p>
+        <p><b>Entertainment Computing（二作）</b></p>
+        <a href="https://www.sciencedirect.com/journal/entertainment-computing"
+           target="_blank">Journal</a>
+      </div>
+    </div>
+
+    <!-- Paper 3 -->
+    <div class="card">
+      <img src="Pictures/research_paper3.png"
+           onerror="this.style.display='none'">
+      <div class="card-body">
+        <h3>AP-Based LLM Story Generation</h3>
+        <p>
+          AP構造を用いたLLM物語生成。
+          SFを通じて技術発展を構想する研究。
+        </p>
+        <p><b>国際会議投稿準備中</b></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== ゲーム遍歴（图片全部去掉，纯文字） ===== -->
+<div class="section" id="history">
+  <div class="history-text">
+    幼少期から家庭用ゲームやアニメに親しみ、<br>
+    中高生時代は音楽ゲームやチームプレイを好む。<br>
+    現在はSLG・物語性の高いゲームに強い関心を持ち、<br>
+    「遊ぶ側」と「作る側」の両面からゲームに関わっている。
+  </div>
+</div>
+
+<script>
+  // Tab 切替（挙動は変更なし）
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById(tab.dataset.tab).classList.add("active");
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
