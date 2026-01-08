@@ -2,8 +2,9 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>YE Zifan | AI × Game Portfolio</title>
+<title>YE Zifan | Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body {
   margin: 0;
@@ -12,29 +13,121 @@ body {
   color: #222;
 }
 
-header {
+/* ===== Header ===== */
+.top-header {
+  position: relative;
+  height: 240px;
   background: #111;
   color: #fff;
-  padding: 40px 24px;
+  overflow: hidden;
 }
 
-header h1 {
+.top-header.fallback {
+  background: #111;
+}
+
+.header-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-overlay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 48px 32px;
+  background: linear-gradient(to right,
+    rgba(0,0,0,0.65),
+    rgba(0,0,0,0.25),
+    rgba(0,0,0,0)
+  );
+}
+
+/* avatar */
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: #444;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* name */
+.name h1 {
   margin: 0;
-  font-size: 32px;
+  font-size: 30px;
 }
 
-header p {
-  margin-top: 8px;
-  opacity: 0.8;
+.jp-name {
+  font-size: 20px;
+  margin-left: 10px;
+  opacity: 0.9;
 }
 
+.name p {
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+/* ===== Tabs ===== */
+.tabs {
+  display: flex;
+  gap: 28px;
+  padding: 14px 32px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding-bottom: 8px;
+  position: relative;
+}
+
+.tab.active {
+  font-weight: 600;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 3px;
+  background: #00a1d6;
+  border-radius: 2px;
+}
+
+/* ===== Content ===== */
 main {
   max-width: 1200px;
   margin: auto;
   padding: 24px;
 }
 
-/* grid */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -44,16 +137,13 @@ main {
 .card {
   background: #fff;
   border-radius: 10px;
-  padding: 18px;
+  padding: 16px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 .card h2 {
+  margin-top: 0;
   font-size: 18px;
-  margin: 0;
   border-bottom: 2px solid #eee;
   padding-bottom: 6px;
 }
@@ -67,16 +157,7 @@ main {
   align-items: center;
   justify-content: center;
   color: #666;
-  font-size: 14px;
-}
-
-a {
-  color: #0066cc;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+  margin-bottom: 10px;
 }
 
 .tag {
@@ -84,9 +165,14 @@ a:hover {
   background: #eee;
   padding: 4px 8px;
   border-radius: 6px;
-  display: inline-block;
   margin-right: 6px;
 }
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
 
 footer {
   text-align: center;
@@ -99,102 +185,114 @@ footer {
 
 <body>
 
-<header>
-  <h1>YE Zifan</h1>
-  <p>AI × ゲーム｜研究・実装ポートフォリオ</p>
+<header class="top-header">
+  <img src="Pictures/header.png" class="header-bg"
+       onerror="this.style.display='none';document.querySelector('.top-header').classList.add('fallback');">
+
+  <div class="header-overlay">
+    <div class="avatar">
+      <img src="Pictures/avatar.png" onerror="this.style.display='none'">
+    </div>
+    <div class="name">
+      <h1>YE Zifan <span class="jp-name">叶 子凡</span></h1>
+      <p>AI × ゲーム｜研究・開発ポートフォリオ</p>
+    </div>
+  </div>
 </header>
+
+<nav class="tabs">
+  <button class="tab active" onclick="showTab('games')">制作ゲーム</button>
+  <button class="tab" onclick="showTab('research')">研究</button>
+  <button class="tab" onclick="showTab('play')">遊んだゲーム</button>
+  <button class="tab" onclick="showTab('about')">プロフィール</button>
+</nav>
 
 <main>
 
-<div class="grid">
+<!-- Games -->
+<section id="games" class="tab-content active">
+  <div class="grid">
+    <div class="card">
+      <h2>Study With ME</h2>
+      <img src="Pictures/study.png" class="thumb"
+           onerror="this.replaceWith(createFallback('ゲーム画面'))">
+      <p>居家生活を想定した、リラックス系ゲーム。</p>
+      <p>
+        <span class="tag">Unity</span>
+        <span class="tag">C#</span>
+        <span class="tag">UI/UX</span>
+      </p>
+      <a href="https://zifanye.github.io/StudyWithME_unity/" target="_blank">▶ プレイ</a>
+    </div>
 
-  <!-- Profile -->
-  <div class="card">
-    <h2>Profile</h2>
-    <div class="thumb">写真・イメージ</div>
-    <p>
-      AI とゲームを軸に、研究と実装の両立に取り組んでいます。<br>
-      高校時代はロボット競技チームで後方支援を担当し、海外大会（米国・ニュージーランド等）での受賞を経験しました。<br>
-      大学以降は計算機とプログラミングへの関心を深め、欧州交換留学を経て日本で AI 研究を行っています。
-    </p>
+    <div class="card">
+      <h2>SLG（開発中）</h2>
+      <div class="thumb">開発中</div>
+      <p>システム設計とプロトタイプ実装を進行中。</p>
+    </div>
   </div>
+</section>
 
-  <!-- Game Demo -->
-  <div class="card">
-    <h2>Game Demo</h2>
-    <div class="thumb">ゲーム画面 / GIF</div>
-    <p><strong>Study With ME（Unity）</strong></p>
-    <p>
-      居家生活を想定した、作業・休憩に寄り添うリラックス系ゲーム。<br>
-      日常感と没入感のバランスを重視しました。
-    </p>
-    <p>
-      <span class="tag">Unity</span>
-      <span class="tag">C#</span>
-      <span class="tag">UI/UX</span>
-    </p>
-    <a href="https://zifanye.github.io/StudyWithME_unity/" target="_blank">
-      ▶ プレイする
-    </a>
+<!-- Research -->
+<section id="research" class="tab-content">
+  <div class="grid">
+    <div class="card">
+      <h2>研究・論文</h2>
+      <div class="thumb">研究デモ</div>
+      <p>
+        ・IEEE GCCE デモ論文（採択）<br>
+        ・国際会議論文 3 本（うち 2 本は支援）
+      </p>
+    </div>
   </div>
+</section>
 
-  <!-- Ongoing Game -->
-  <div class="card">
-    <h2>Ongoing Project</h2>
-    <div class="thumb">開発中スクリーンショット</div>
-    <p><strong>SLGゲーム（開発中）</strong></p>
-    <p>
-      キャラクター・システム設計を含むシミュレーションゲーム。<br>
-      現在は設計とプロトタイプ実装を並行して進行中。
-    </p>
-    <p>
-      <span class="tag">Game Design</span>
-      <span class="tag">System</span>
-      <span class="tag">Prototype</span>
-    </p>
+<!-- Played Games -->
+<section id="play" class="tab-content">
+  <div class="grid">
+    <div class="card">
+      <h2>幼少期〜学生時代</h2>
+      <div class="thumb">ゲーム履歴</div>
+      <p>
+        RPG / SLG / 音楽ゲーム / スマホゲームなど。<br>
+        長年のプレイ体験が制作視点に影響しています。
+      </p>
+    </div>
   </div>
+</section>
 
-  <!-- Research -->
-  <div class="card">
-    <h2>Research</h2>
-    <div class="thumb">研究デモ / 図</div>
-    <p>
-      ・IEEE GCCE デモ論文（採択）<br>
-      ・国際会議論文 3 本（うち 2 本は先輩研究の支援）<br>
-      ・ストーリー進行に応じた立ち絵切替手法の研究
-    </p>
-    <a href="#">▶ 論文一覧</a>
+<!-- About -->
+<section id="about" class="tab-content">
+  <div class="grid">
+    <div class="card">
+      <h2>プロフィール</h2>
+      <div class="thumb">写真</div>
+      <p>
+        規律を重んじつつ、目標に向けて継続的に努力する姿勢を大切にしています。
+      </p>
+    </div>
   </div>
-
-  <!-- Skills -->
-  <div class="card">
-    <h2>Skills</h2>
-    <div class="thumb">技術イメージ</div>
-    <p>
-      言語：C#, Python, JavaScript, C++<br>
-      分野：ゲーム開発 / AI / UI設計<br>
-      強み：短期間での判断と実行、支援役としての調整力
-    </p>
-  </div>
-
-  <!-- Personal -->
-  <div class="card">
-    <h2>Personal</h2>
-    <div class="thumb">日常・趣味写真</div>
-    <p>
-      趣味：カフェラテ巡り（日本各地）<br>
-      特技：指の柔軟性（音楽ゲーム経験）<br>
-      規律を重んじつつ、内面と向き合い努力を継続する姿勢を大切にしています。
-    </p>
-  </div>
-
-</div>
+</section>
 
 </main>
 
-<footer>
-© 2026 YE Zifan
-</footer>
+<footer>© 2026 YE Zifan</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector(`[onclick="showTab('${id}')"]`).classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+function createFallback(text) {
+  const d = document.createElement('div');
+  d.className = 'thumb';
+  d.innerText = text;
+  return d;
+}
+</script>
 
 </body>
 </html>
