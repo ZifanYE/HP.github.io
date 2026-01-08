@@ -1,16 +1,16 @@
 <!--
 ========================================================
-【Pictures フォルダに必要な画像一覧（4:3 / 小さめ表示）】
+【Pictures フォルダに必要な画像一覧（4:3 推奨）】
 
 Pictures/
-├─ header.jpg                // 上部ヘッダー写真（横長）
+├─ header.png                // 上部ヘッダー写真（横長・高めに表示）
 ├─ avatar.png                // 名前左の円形アイコン
-├─ game_studywithme.png      // ゲームデモ画像（小さく表示）
-├─ game_slg.png              // SLG 開発中画像（小さく表示）
-├─ research_paper1.png       // 研究①（GCCE Demo）
-├─ research_paper2.png       // 研究②（Entertainment Computing）
-├─ research_paper3.png       // 研究③（AP-Based）
-※ 研究画像は無くても可（無い場合はテキストのみ表示）
+├─ game_studywithme.png      // ゲームデモ画像
+├─ game_slg.png              // SLG 開発中画像
+├─ research_paper1.png       // GCCE Demo Paper
+├─ research_paper2.png       // Entertainment Computing
+├─ research_paper3.png       // GCCE 2025（二作）
+※ research 画像は無くても可（無い場合は非表示）
 ========================================================
 -->
 
@@ -30,19 +30,20 @@ Pictures/
 
     /* ===== Header ===== */
     header {
-      background: url("Pictures/header.jpg") center/cover no-repeat;
-      padding: 20px;
+      /* ★ 変更：高さを大きくして横長感を強調 */
+      background: url("Pictures/header.png") center/cover no-repeat;
+      padding: 40px 32px;              /* ← 高さアップ */
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
     }
 
     .avatar {
-      width: 72px;               /* ★ 图片过大 → 缩小头像 */
-      height: 72px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
       overflow: hidden;
-      border: 2px solid rgba(255,255,255,0.8);
+      border: 2px solid rgba(255,255,255,0.85);
       flex-shrink: 0;
     }
 
@@ -58,12 +59,12 @@ Pictures/
 
     .name-block h1 {
       margin: 0;
-      font-size: 24px;           /* ★ 标题略缩小 */
+      font-size: 28px;
     }
 
     .name-block p {
-      margin: 4px 0 0;
-      font-size: 13px;
+      margin: 6px 0 0;
+      font-size: 14px;
       opacity: 0.9;
     }
 
@@ -74,7 +75,7 @@ Pictures/
     }
 
     .tab {
-      padding: 10px 18px;        /* ★ Tab 更紧凑 */
+      padding: 12px 20px;
       color: #ccc;
       cursor: pointer;
       user-select: none;
@@ -89,18 +90,56 @@ Pictures/
     /* ===== Sections ===== */
     .section {
       display: none;
-      padding: 18px;
+      padding: 20px;
     }
 
     .section.active {
       display: block;
     }
 
-    /* ===== Grid ===== */
+    /* ====================================================
+       ゲーム制作：1行1プロジェクト（画像1/3 + ログ2/3）
+       ==================================================== */
+    .game-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr;   /* ★ 左1/3 右2/3 */
+      gap: 16px;
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .game-row img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #ddd;
+    }
+
+    .game-log {
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .game-log h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .game-log a {
+      color: #4caf50;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    /* ===== Research ===== */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* ★ 卡片更小 */
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
     }
 
     .card {
@@ -110,17 +149,16 @@ Pictures/
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    /* ===== 图片统一缩小 ===== */
     .card img {
       width: 100%;
       aspect-ratio: 4 / 3;
       object-fit: cover;
       background: #ddd;
-      max-height: 180px;         /* ★ 限制图片高度，避免过大 */
+      max-height: 180px;
     }
 
     .card-body {
-      padding: 10px;
+      padding: 12px;
       font-size: 13px;
       line-height: 1.5;
     }
@@ -136,14 +174,14 @@ Pictures/
       font-size: 12px;
     }
 
-    /* ===== 游戏遍歴：纯文字（去掉图片） ===== */
+    /* ===== Game History（文字のみ） ===== */
     .history-text {
       background: white;
       border-radius: 8px;
-      padding: 14px;
+      padding: 16px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
   </style>
 </head>
@@ -169,39 +207,49 @@ Pictures/
 
 <!-- ===== ゲーム制作 ===== -->
 <div class="section active" id="games">
-  <div class="grid">
 
-    <div class="card">
-      <img src="Pictures/game_studywithme.png"
-           onerror="this.style.display='none'">
-      <div class="card-body">
-        <h3>Study With ME</h3>
-        <p>
-          居家生活を想定したリラックス系ゲームデモ。
-          Unity / WebGL。
-        </p>
-        <a href="https://zifanye.github.io/StudyWithME_unity/" target="_blank">
-          ▶ Demo
-        </a>
-      </div>
+  <!-- Study With ME -->
+  <div class="game-row">
+    <img src="Pictures/game_studywithme.png"
+         onerror="this.style.display='none'">
+    <div class="game-log">
+      <h3>Study With ME</h3>
+      <p>
+        居家生活を想定したリラックス系ゲームデモ。<br>
+        Unity（WebGL）で実装し、環境音・時間経過・作業体験の
+        「邪魔をしない設計」を意識して開発。
+      </p>
+      <p>
+        プロトタイプ段階ではUI密度と視線移動を検証し、
+        プレイヤーが長時間起動したままにできる設計を記録。
+      </p>
+      <a href="https://zifanye.github.io/StudyWithME_unity/" target="_blank">
+        ▶ Demo を開く
+      </a>
     </div>
-
-    <div class="card">
-      <img src="Pictures/game_slg.png"
-           onerror="this.style.display='none'">
-      <div class="card-body">
-        <h3>SLG Project（開発中）</h3>
-        <p>
-          戦略要素とキャラクター管理を重視したSLG。
-          現在システム設計・UIを開発中。
-        </p>
-      </div>
-    </div>
-
   </div>
+
+  <!-- SLG -->
+  <div class="game-row">
+    <img src="Pictures/game_slg.png"
+         onerror="this.style.display='none'">
+    <div class="game-log">
+      <h3>SLG Project（開発中）</h3>
+      <p>
+        キャラクター管理と戦略選択を中心としたSLG。<br>
+        現在はシステム分解とUI遷移を設計しながら、
+        将来的なAI統合を前提に実装を進行中。
+      </p>
+      <p>
+        仕様を小単位で検証し、ログとして残すことで
+        長期開発でも破綻しない構造を意識。
+      </p>
+    </div>
+  </div>
+
 </div>
 
-<!-- ===== 研究・論文（图片增加，3 篇） ===== -->
+<!-- ===== 研究・論文 ===== -->
 <div class="section" id="research">
   <div class="grid">
 
@@ -212,8 +260,8 @@ Pictures/
       <div class="card-body">
         <h3>Bring Your Own Story</h3>
         <p>
-          LLMを用いて、既存文学作品を即座に視覚ノベル化。
-          Unity内で背景・対話・選択肢を自動生成。
+          LLMを用いて既存文学作品を即座に視覚ノベル化。
+          Unity内で背景・対話・選択肢をリアルタイム生成。
           本地モデルによる立絵背景除去も実装。
         </p>
         <p><b>IEEE GCCE 2025（Demo / 一作）</b></p>
@@ -228,44 +276,43 @@ Pictures/
       <div class="card-body">
         <h3>Dynamic Difficulty Adjustment</h3>
         <p>
-          LLMを用いたカードゲーム（MTG）の動的難易度調整。
-          情報非対称な2体のAIによりバランス制御。
+          LLMを用いたカードゲーム（Magic: The Gathering）の
+          動的難易度調整。情報非対称な2体のAIでバランス制御。
         </p>
         <p><b>Entertainment Computing（二作）</b></p>
-        <a href="https://www.sciencedirect.com/journal/entertainment-computing"
-           target="_blank">Journal</a>
       </div>
     </div>
 
-    <!-- Paper 3 -->
+    <!-- Paper 3（修正：GCCE2025 二作） -->
     <div class="card">
       <img src="Pictures/research_paper3.png"
            onerror="this.style.display='none'">
       <div class="card-body">
         <h3>AP-Based LLM Story Generation</h3>
         <p>
-          AP構造を用いたLLM物語生成。
-          SFを通じて技術発展を構想する研究。
+          AP構造を用いたLLMによる物語生成。
+          SFを通じた技術発展の構想を扱う。
         </p>
-        <p><b>国際会議投稿準備中</b></p>
+        <p><b>IEEE GCCE 2025（二作）</b></p>
+        <a href="https://ieeexplore.ieee.org/" target="_blank">IEEE Xplore</a>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- ===== ゲーム遍歴（图片全部去掉，纯文字） ===== -->
+<!-- ===== ゲーム遍歴 ===== -->
 <div class="section" id="history">
   <div class="history-text">
     幼少期から家庭用ゲームやアニメに親しみ、<br>
-    中高生時代は音楽ゲームやチームプレイを好む。<br>
-    現在はSLG・物語性の高いゲームに強い関心を持ち、<br>
-    「遊ぶ側」と「作る側」の両面からゲームに関わっている。
+    中高生時代は音楽ゲームやチームプレイを中心にプレイ。<br>
+    現在はSLGや物語性の高いゲームに関心を持ち、<br>
+    「遊ぶ経験」を制作・研究へと接続している。
   </div>
 </div>
 
 <script>
-  // Tab 切替（挙動は変更なし）
+  // Tab 切替（挙動変更なし）
   document.querySelectorAll(".tab").forEach(tab => {
     tab.addEventListener("click", () => {
       document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
