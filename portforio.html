@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>叶 子凡 | Portfolio 2026</title>
+  <style>
+    :root {
+      --primary: #52c41a;
+      --secondary: #ff7875;
+      --bg-soft: #f0f7f2;
+      --card-shadow: 0 12px 40px rgba(0,0,0,0.04);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', 'Quicksand', sans-serif;
+      background: #fafcfb;
+      color: #2c3e50;
+    }
+
+    /* ===== Professional Header ===== */
+    header {
+      height: 400px;
+      background: linear-gradient(135deg, rgba(82,196,26,0.1), rgba(0,0,0,0.4)), url("Pictures/header.png") center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+    }
+
+    .avatar-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      width: 120px; height: 120px;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* 灵动的非对称圆角 */
+      border: 5px solid white;
+      background: #fff;
+      transition: 0.5s;
+    }
+    .avatar:hover { border-radius: 50%; transform: scale(1.05); }
+
+    .header-tags {
+      display: flex; gap: 8px; margin-top: 15px;
+    }
+    .h-tag {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* ===== Bento Navigation ===== */
+    nav {
+      position: sticky; top: 20px;
+      margin: -30px auto 0;
+      width: fit-content;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(12px);
+      padding: 8px;
+      border-radius: 24px;
+      display: flex;
+      gap: 5px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      z-index: 1000;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      border-radius: 18px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.3s;
+      color: #666;
+    }
+    .tab.active { background: var(--primary); color: white; }
+
+    /* ===== Content Sections ===== */
+    .container { max-width: 900px; margin: 60px auto; padding: 0 20px; }
+    .section { display: none; animation: slideIn 0.5s ease; }
+    .section.active { display: block; }
+
+    @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+    /* ===== Interactive Cards ===== */
+    .p-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      margin-bottom: 30px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      border: 1px solid #f0f0f0;
+    }
+    .p-card:hover { transform: scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+    
+    .p-img { width: 35%; overflow: hidden; position: relative; }
+    .p-img img { width: 100%; height: 100%; object-fit: cover; }
+    .p-img::after {
+      content: "GO 🚀";
+      position: absolute; inset: 0; background: rgba(82, 196, 26, 0.8);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 900; opacity: 0; transition: 0.3s;
+    }
+    .p-card:hover .p-img::after { opacity: 1; }
+
+    .p-info { padding: 30px; flex: 1; }
+    .p-info h3 { margin: 0 0 12px; font-size: 20px; }
+    .p-info p { font-size: 14px; color: #666; line-height: 1.6; }
+
+    /* ===== Log System (GitHub Pages Mode) ===== */
+    .history-box {
+      background: white; border-radius: 30px; padding: 40px;
+      position: relative; box-shadow: var(--card-shadow);
+    }
+    
+    .admin-tool {
+      position: absolute; top: 30px; right: 30px;
+      display: flex; gap: 10px;
+    }
+    .add-btn {
+      width: 40px; height: 40px; background: var(--secondary);
+      border: none; border-radius: 50%; color: white;
+      cursor: pointer; font-size: 20px; box-shadow: 0 5px 15px rgba(255,120,117,0.3);
+    }
+
+    .timeline { border-left: 2px dashed #eee; margin-left: 20px; }
+    .t-item { position: relative; padding-left: 35px; margin-bottom: 35px; }
+    .t-item::before {
+      content: ""; position: absolute; left: -10px; top: 0;
+      width: 18px; height: 18px; background: white;
+      border: 4px solid var(--secondary); border-radius: 50%;
+    }
+    .t-date { font-weight: 800; color: var(--secondary); margin-bottom: 8px; font-size: 14px; }
+    .t-content { background: var(--bg-soft); padding: 15px 20px; border-radius: 18px; font-size: 14px; }
+
+    /* Modal */
+    #modal {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px); z-index: 2000; align-items: center; justify-content: center;
+    }
+    .modal-ui { background: white; padding: 30px; border-radius: 30px; width: 350px; text-align: center; }
+    textarea { width: 100%; padding: 15px; border-radius: 15px; border: 1px solid #eee; margin: 15px 0; font-family: inherit; }
+    .gen-btn { background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; }
+
+    @media (max-width: 768px) {
+      .p-card { flex-direction: column; }
+      .p-img { width: 100%; height: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="avatar-container">
+    <img src="Pictures/avatar.jpg" class="avatar" onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Zifan'">
+  </div>
+  <h1>叶 子凡 (YE Zifan)</h1>
+  <div class="header-tags">
+    <span class="h-tag">🎓 立命館 M2</span>
+    <span class="h-tag">🤖 LLM Research</span>
+    <span class="h-tag">🎮 Game Dev</span>
+  </div>
+</header>
+
+<nav>
+  <div class="tab active" data-tab="it">IT</div>
+  <div class="tab" data-tab="games">Games</div>
+  <div class="tab" data-tab="research">Research</div>
+  <div class="tab" data-tab="history">Activity</div>
+</nav>
+
+<div class="container">
+  <div class="section active" id="it">
+    <div class="p-card" onclick="window.open('https://astock-bqxskxtmqx7qxvwi79bdvj.streamlit.app/')">
+      <div class="p-img"><img src="Pictures/finance_it.png"></div>
+      <div class="p-info">
+        <h3>金融 × IT 自動株価分析系统</h3>
+        <p>基于 Python 的 A 股 ETF 自动监控与回测平台。解决 IP 封锁问题，实现多维度动能可视化。专业与实操的结合。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="games">
+    <div class="p-card" onclick="window.open('https://zifanye.github.io/StudyWithME_unity/')">
+      <div class="p-img"><img src="Pictures/game_studywithme.png"></div>
+      <div class="p-info">
+        <h3>Study With ME</h3>
+        <p>专注于“氛围感”的 Unity 实验项目。通过 WebGL 探索用户在学习场景下的视觉焦点与交互密度。支持全设备访问。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="research">
+    <div class="p-card" onclick="window.open('https://ieeexplore.ieee.org/document/11274671')">
+      <div class="p-img"><img src="Pictures/research_paper1.png"></div>
+      <div class="p-info">
+        <h3>Bring Your Own Story</h3>
+        <p>LLM-based visual novel generation. Presented at IEEE GCCE 2025. 一键将文学作品转化为可交互的互动小说。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="history">
+    <div class="history-box">
+      <div class="admin-tool">
+        <button class="add-btn" onclick="openModal()">+</button>
+      </div>
+      <div id="log-list">
+        <div class="t-item">
+          <div class="t-date">2026.02.20</div>
+          <div class="t-content"><b>🏆 研究奨励賞 受賞</b><br>国际会议 GCCE 2025 成果评估认定。感谢导师与团队的支持！</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">2026.02.28</div>
+          <div class="t-content"><b>📈 监控系统更新</b><br>上线了 4 类 ETF 的 25 日动量对比图，修复了 AShare 数据同步 Bug。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal">
+  <div class="modal-ui">
+    <h3>新增日志 📝</h3>
+    <input type="text" id="in-date" placeholder="2026.03.01">
+    <textarea id="in-text" rows="4" placeholder="今天有什么进展？"></textarea>
+    <p style="font-size: 11px; color: #999;">注：由于 GitHub Pages 是静态的，点保存后我会为你生成代码。你只需把代码粘贴回 index.html 即可永久保存。</p>
+    <button class="gen-btn" onclick="generateCode()">生成并保存</button>
+    <button onclick="closeModal()" style="background:none; border:none; color:#999; cursor:pointer; margin-top:10px;">取消</button>
+  </div>
+</div>
+
+<script>
+  // --- Tab Logic ---
+  const tabs = document.querySelectorAll('.tab');
+  const sections = document.querySelectorAll('.section');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById(t.dataset.tab).classList.add('active');
+    });
+  });
+
+  // --- GitHub Pages Log Helper ---
+  const modal = document.getElementById('modal');
+  function openModal() {
+    modal.style.display = 'flex';
+    document.getElementById('in-date').value = new Date().toISOString().split('T')[0].replace(/-/g, '.');
+  }
+  function closeModal() { modal.style.display = 'none'; }
+
+  function generateCode() {
+    const date = document.getElementById('in-date').value;
+    const text = document.getElementById('in-text').value;
+    
+    // 1. 实时预览
+    const newList = document.getElementById('log-list');
+    const item = `<div class="t-item"><div class="t-date">${date}</div><div class="t-content">${text}</div></div>`;
+    newList.insertAdjacentHTML('afterbegin', item);
+
+    // 2. 生成代码片段并提醒
+    const codeSnippet = `        <div class="t-item">
+          <div class="t-date">${date}</div>
+          <div class="t-content">${text}</div>
+        </div>`;
+    
+    console.log("请将以下代码粘贴到 index.html 的 <div id='log-list'> 内：\n\n" + codeSnippet);
+    alert("日志已动态添加！\n\n【重要】因为这是静态网页，请在控制台(F12)查看生成的 HTML 代码，将其复制回 index.html 提交到 GitHub 才能永久生效哦！");
+    closeModal();
+  }
+</script>
+
+</body>
+</html>
